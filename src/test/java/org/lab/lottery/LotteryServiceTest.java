@@ -38,12 +38,12 @@ public class LotteryServiceTest {
     }
 
     @Test
-    void testGetAll() {
+    void testGetAllParticipants() {
         //given
         participantRepository.save(Participant.builder().name("Olga").age(21).city("Moscow").build());
         participantRepository.save(Participant.builder().name("Maria").age(23).city("Mushosransk").build());
         //when
-        List<Participant> all = lotteryService.findAll();
+        List<Participant> all = lotteryService.getParticipants();
         //then
         then(all).isNotNull();
         then(all.size()).isEqualTo(2);

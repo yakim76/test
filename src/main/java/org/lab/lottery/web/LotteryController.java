@@ -22,7 +22,7 @@ public class LotteryController {
 
     @GetMapping("/lottery/participant")
     List<Participant> getParticipants() {
-        return lotteryService.findAll();
+        return lotteryService.getParticipants();
     }
 
     @PostMapping("/lottery/participant")

@@ -2,6 +2,7 @@ package org.lab.lottery.web;
 
 import org.junit.jupiter.api.Test;
 import org.lab.lottery.LotteryService;
+import org.lab.lottery.NotEnoughParticipantsException;
 import org.lab.lottery.model.Participant;
 import org.lab.lottery.model.Winner;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ class LotteryControllerTest {
     @Test
     void getParticipants() throws Exception {
         //given
-        given(lotteryService.findAll()).willReturn(List.of(
+        given(lotteryService.getParticipants()).willReturn(List.of(
                 Participant.builder().id(1L).name("Olga").age(23).build()
         ));
         //when
@@ -48,4 +49,14 @@ class LotteryControllerTest {
                 .andExpect(jsonPath("$[0]['age']").value(23))
                 .andExpect(jsonPath("$[0]['prize']").value(100));
     }
+
+    @Test
+    void testIfFailedNotEnoughParticipants() throws Exception {
+        //given
+        given(lotteryService.play()).willThrow(NotEnoughParticipantsException.class);
+        //when
+        mockMvc.perform(get("/lottery/start"))
+                .andExpect(status().isExpectationFailed());
+    }
+
 }
