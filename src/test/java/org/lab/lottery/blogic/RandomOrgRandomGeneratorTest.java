@@ -1,7 +1,8 @@
-package org.lab.lottery;
+package org.lab.lottery.blogic;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.lab.lottery.blogic.RandomOrgRandomGenerator;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 
 import static org.assertj.core.api.BDDAssertions.then;

@@ -1,8 +1,9 @@
-package org.lab.lottery;
+package org.lab.lottery.model;
 
 import org.junit.jupiter.api.Test;
 import org.lab.lottery.model.Participant;
 import org.lab.lottery.model.Winner;
+import org.lab.lottery.model.WinnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;

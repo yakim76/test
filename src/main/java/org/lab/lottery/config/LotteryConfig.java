@@ -1,8 +1,8 @@
 package org.lab.lottery.config;
 
-import org.lab.lottery.JavaRandomGenerator;
-import org.lab.lottery.RandomGenerator;
-import org.lab.lottery.RandomOrgRandomGenerator;
+import org.lab.lottery.blogic.JavaRandomGenerator;
+import org.lab.lottery.blogic.RandomGenerator;
+import org.lab.lottery.blogic.RandomOrgRandomGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;

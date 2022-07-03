@@ -1,7 +1,9 @@
-package org.lab.lottery;
+package org.lab.lottery.blogic;
 
 
 import org.junit.jupiter.api.Test;
+import org.lab.lottery.model.ParticipantRepository;
+import org.lab.lottery.model.WinnerRepository;
 import org.lab.lottery.model.Participant;
 import org.lab.lottery.model.Winner;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +16,9 @@ import static org.assertj.core.api.BDDAssertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @Transactional
-public class LotteryServiceTest {
+public class SimpleLotteryServiceTest {
     @Autowired
-    private LotteryService lotteryService;
+    private SimpleLotteryService lotteryService;
     @Autowired
     private ParticipantRepository participantRepository;
 

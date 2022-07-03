@@ -1,5 +1,7 @@
-package org.lab.lottery;
+package org.lab.lottery.blogic;
 
+import org.lab.lottery.model.ParticipantRepository;
+import org.lab.lottery.model.WinnerRepository;
 import org.lab.lottery.config.PrizeRange;
 import org.lab.lottery.model.Participant;
 import org.lab.lottery.model.Winner;
@@ -10,28 +12,31 @@ import java.util.List;
 
 
 @Service
-public class LotteryService {
+public class SimpleLotteryService implements LotteryService {
     private final ParticipantRepository participantRepository;
     private final WinnerRepository winnerRepository;
     private final RandomGenerator randomGenerator;
     private final PrizeRange prizeRange;
 
     @Autowired
-    public LotteryService(ParticipantRepository participantRepository, WinnerRepository winnerRepository, RandomGenerator randomGenerator, PrizeRange prizeRange) {
+    public SimpleLotteryService(ParticipantRepository participantRepository, WinnerRepository winnerRepository, RandomGenerator randomGenerator, PrizeRange prizeRange) {
         this.participantRepository = participantRepository;
         this.winnerRepository = winnerRepository;
         this.randomGenerator = randomGenerator;
         this.prizeRange = prizeRange;
     }
 
+    @Override
     public Participant registerParticipant(Participant participant) {
         return participantRepository.save(participant);
     }
 
+    @Override
     public List<Participant> getParticipants() {
         return participantRepository.findAll();
     }
 
+    @Override
     public Winner play() throws NotEnoughParticipantsException {
         List<Participant> participants = participantRepository.findAll();
         if (participants.size() < 2) {
@@ -47,6 +52,7 @@ public class LotteryService {
         return winner;
     }
 
+    @Override
     public List<Winner> getWinners() {
         return winnerRepository.findAll();
     }

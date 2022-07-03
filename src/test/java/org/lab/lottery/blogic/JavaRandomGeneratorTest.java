@@ -1,4 +1,4 @@
-package org.lab.lottery;
+package org.lab.lottery.blogic;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
+import org.lab.lottery.blogic.JavaRandomGenerator;
 
 import static org.assertj.core.api.BDDAssertions.*;
 

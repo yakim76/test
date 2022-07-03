@@ -1,4 +1,4 @@
-package org.lab.lottery;
+package org.lab.lottery.blogic;
 
 import java.util.Random;
 
