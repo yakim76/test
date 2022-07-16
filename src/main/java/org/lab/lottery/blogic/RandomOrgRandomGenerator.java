@@ -2,39 +2,34 @@ package org.lab.lottery.blogic;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.client.ClientHttpRequest;
-import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse.BodyHandlers;
 
 public class RandomOrgRandomGenerator implements RandomGenerator {
 
   private static final String URL_TEMPLATE = "https://www.random.org/integers/?num=1&min=%d&max=%d&col=1&base=10&format=plain&rnd=new";
-  private final OkHttp3ClientHttpRequestFactory clientFactory;
+  private final HttpClient httpClient;
 
-  public RandomOrgRandomGenerator(OkHttp3ClientHttpRequestFactory clientFactory) {
-    this.clientFactory = clientFactory;
+  public RandomOrgRandomGenerator(HttpClient httpClient) {
+    this.httpClient = httpClient;
   }
 
   @Override
   public int randomInRange(int min, int max) {
-    ClientHttpRequest request;
+    var request = HttpRequest.newBuilder()
+        .uri(URI.create(String.format(URL_TEMPLATE, min, max)))
+        .build();
     try {
-      request = clientFactory.createRequest(
-          new URI(String.format(URL_TEMPLATE, min, max)),
-          HttpMethod.GET
-      );
-    } catch (URISyntaxException e) {
-      throw new RuntimeException(e);
-    }
-    try {
-      String s;
-      try (ClientHttpResponse execute = request.execute()) {
-        s = (new String(execute.getBody().readAllBytes())).trim();
+      var response = httpClient.send(request, BodyHandlers.ofString());
+      if (response.statusCode() == 200) {
+        return Integer.parseInt(response.body().trim());
+      } else {
+        throw new RuntimeException();
       }
-      return Integer.parseInt(s);
     } catch (IOException e) {
+      throw new RuntimeException(e);
+    } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
   }
